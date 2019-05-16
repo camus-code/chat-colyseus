@@ -2,7 +2,6 @@ import React from 'react';
 import * as Colyseus from "colyseus.js";
 import { withAuthorization } from '../Session';
 
-
 var client = new Colyseus.Client('ws://localhost:2567');
 var room;
 
@@ -28,17 +27,17 @@ function addListeners (room) {
 }
 
 function join() {
-  room = client.join('create_or_join');
+  room = client.join('chat');
   addListeners(room);
 }
 
 function create() {
-  room = client.join('create_or_join', { create: true });
+  room = client.join('chat', { create: true });
   addListeners(room);
 }
 
 function getAvailableRooms() {
-  client.getAvailableRooms('create_or_join', function(rooms, err) {
+  client.getAvailableRooms('chat', function(rooms, err) {
     console.log('Available rooms:', rooms);
   });
 }
@@ -56,6 +55,7 @@ class Chat extends React.Component {
 		room.send({ message: input.value });
 		input.value = "";
 	}
+	console.log(this.props.firebase.auth)
    return (
    	<div className="App">
 		    <button onClick={join}>Join</button>

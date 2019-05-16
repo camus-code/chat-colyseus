@@ -12,7 +12,7 @@ const server = http.createServer(app);
 const gameServer = new Server({ server });
 
 // register your room handlers
-gameServer.register('create_or_join', CreateOrJoinRoom);
+gameServer.register('chat', CreateOrJoinRoom);
 
 // Register colyseus monitor AFTER registering your room handlers
 app.use("/colyseus", monitor(gameServer));

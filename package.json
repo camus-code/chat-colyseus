@@ -5,6 +5,7 @@
   "dependencies": {
     "colyseus.js": "^0.10.5",
     "firebase": "^6.0.2",
+    "http2": "^3.3.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router": "^5.0.0",

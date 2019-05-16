@@ -8,12 +8,12 @@ const config = {
   projectId: process.env.REACT_APP_PROJECT_ID,
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  credential: process.env.REACT_APP_GOOGLE_APPLICATION_CREDENTIALS,
 };
 
 class Firebase {
   constructor() {
     app.initializeApp(config);
-
     this.auth = app.auth();
   }
 

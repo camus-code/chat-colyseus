@@ -1,4 +1,5 @@
 import { Room } from "colyseus";
+import * as admin from 'firebase-admin';
 
 export class CreateOrJoinRoom extends Room<any> {
     maxClients = 64;
@@ -10,6 +11,8 @@ export class CreateOrJoinRoom extends Room<any> {
     onJoin (client: any) {
       this.broadcast(`${ client.sessionId } joined.`);
     }
+
+  
 
     requestJoin (options: any) {
     // Prevent the client from joining the same room from another browser tab
