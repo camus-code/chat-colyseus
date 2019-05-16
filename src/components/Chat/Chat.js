@@ -1,5 +1,7 @@
 import React from 'react';
 import * as Colyseus from "colyseus.js";
+import { withAuthorization } from '../Session';
+
 
 var client = new Colyseus.Client('ws://localhost:2567');
 var room;
@@ -56,13 +58,6 @@ class Chat extends React.Component {
 	}
    return (
    	<div className="App">
-      <header className="App-header">
-      	<p>
-		      On this example, the room has its `maxClients` set to 64, and its
-		      `requestJoin` method is configured to allow explicitly creating new
-		      rooms, or joining an existing one.
-		    </p>
-		    <p>Open Developer Tools for log messages.</p>
 		    <button onClick={join}>Join</button>
 		    <button onClick={create}>Create</button>
 		    <button onClick={getAvailableRooms}>List available rooms</button>
@@ -71,11 +66,12 @@ class Chat extends React.Component {
 		      <input type="text" id="input-chat"/>
 		      <button onClick={onSubmit} type="submit" value="send">Send</button>
 		    </form>
-		  </header>
 		  <div id="messages"></div>
     </div>
    )
-   }
- }
+  }
+}
 
-export default Chat;
+const condition = authUser => !!authUser;
+
+export default withAuthorization(condition)(Chat);
