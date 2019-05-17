@@ -1,6 +1,6 @@
 ### Starting Client
-### From root: `yarn start`
+From root: `yarn start`
 
 
 ### Starting Server
-### `cd server && yarn start`
+`cd server && yarn start`
