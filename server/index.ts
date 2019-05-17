@@ -3,7 +3,7 @@ import express from "express";
 import { Server } from "colyseus";
 import { monitor } from "@colyseus/monitor";
 
-import { CreateOrJoinRoom } from "./MyRoom";
+import { ChatRoom } from "./MyRoom";
 
 const port = Number(process.env.PORT || 2567);
 const app = express()
@@ -12,7 +12,7 @@ const server = http.createServer(app);
 const gameServer = new Server({ server });
 
 // register your room handlers
-gameServer.register('chat', CreateOrJoinRoom);
+gameServer.register('chat', ChatRoom);
 
 // Register colyseus monitor AFTER registering your room handlers
 app.use("/colyseus", monitor(gameServer));

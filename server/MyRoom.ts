@@ -1,7 +1,7 @@
 import { Room } from "colyseus";
 import * as admin from 'firebase-admin';
 
-export class CreateOrJoinRoom extends Room<any> {
+export class ChatRoom extends Room<any> {
     maxClients = 64;
 
     onInit (options: any) {
@@ -12,6 +12,20 @@ export class CreateOrJoinRoom extends Room<any> {
       this.broadcast(`${ client.sessionId } joined.`);
     }
 
+  	onAuth (options: any) {
+	    return new Promise((resolve, reject) => {
+	        admin.auth().verifyIdToken(options.idToken)
+	            .then(function(decodedToken) {
+	                var uid = decodedToken.uid;
+	                // ...
+	                resolve(); // onAuth is successful!
+	        }).catch(function(error) {
+	      // Handle error
+	            reject(); // onAuth has failed!
+	        });
+	    });
+ 		}
+    
     onMessage (client: any, data: any) {
         console.log("BasicRoom received message from", data.message.userEmail, ":", data.message.text);
         this.broadcast(data);

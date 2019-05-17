@@ -10,15 +10,12 @@ class Chat extends React.Component {
 
     this.state = {
       currentText: "",
-      messages : {
-      	user: '',
-      	message: ''
-      },
       disabled: true
     };
 	}
 
 	addListeners = (room) => {
+		console.log(room)
 	  room.onJoin.add(() => {
 	    console.log('joined room:', room.id);
 	  })
@@ -32,12 +29,13 @@ class Chat extends React.Component {
 		});
 
 		room.onMessage.add((message) => {
-			const user = message.message ? message.message['user'] : null
+			const user = message.message ? message.message['userEmail'] : null
 			const text = message.message ? message.message['text'] : null
-			var p = document.createElement("p");
-			p.innerHTML = `${user}: ${text}`;
-			document.querySelector("#messages").appendChild(p);
-			console.log(this.state)
+			if (user && text) {
+				var p = document.createElement("p");
+				p.innerHTML = `${user}: ${text}`;
+				document.querySelector("#messages").appendChild(p);
+			}
 		});
 	}
 
